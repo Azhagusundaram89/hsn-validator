@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HSN Code Validator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-image: url('/static/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.75);
+            padding: 40px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .valid {
+            color: #4CAF50;
+        }
+
+        .invalid {
+            color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>HSN Code Validator</h1>
+        <form method="POST">
+            <input type="text" name="hsn_code" placeholder="Enter HSN code" required>
+            <br>
+            <button type="submit">Validate</button>
+        </form>
+
+        {% if result %}
+            <div class="result">
+                {% if result.valid %}
+                    <p class="valid">✅ {{ result.hsn_code }} is valid</p>
+                    <p><strong>Description:</strong> {{ result.description }}</p>
+                {% else %}
+                    <p class="invalid">❌ {{ result.hsn_code }} is invalid</p>
+                    <p><strong>Reason:</strong> {{ result.reason }}</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
